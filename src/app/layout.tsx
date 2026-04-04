@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CyberWolf | Cybersecurity Portfolio",
-  description: "Cybersecurity analyst portfolio - Penetration Testing, CTF, Bug Bounty, and more. Powered by CyberOS.",
-  keywords: ["cybersecurity", "portfolio", "penetration testing", "CTF", "ethical hacking", "bug bounty"],
+  title: "CyberSakura | Anime Cybersecurity Portfolio",
+  description: "Cybersecurity analyst portfolio with an anime twist - macOS-style desktop featuring Penetration Testing, CTF, Bug Bounty, and more.",
+  keywords: ["cybersecurity", "portfolio", "anime", "macOS", "penetration testing", "CTF", "ethical hacking"],
   authors: [{ name: "CyberWolf" }],
   icons: {
     icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0e14] text-foreground overflow-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
         {children}
         <Toaster />

@@ -3,9 +3,9 @@
 import { useCallback, useMemo, useState } from 'react';
 import { useOSStore } from '@/lib/store';
 import BootScreen from './BootScreen';
-import DesktopIcon from './DesktopIcon';
 import Window from './Window';
-import Taskbar from './Taskbar';
+import MenuBar from './MenuBar';
+import Dock from './Dock';
 import Terminal from './Terminal';
 import AboutWindow from './AboutWindow';
 import SkillsWindow from './SkillsWindow';
@@ -13,15 +13,7 @@ import ProjectsWindow from './ProjectsWindow';
 import CTFWindow from './CTFWindow';
 import CertsWindow from './CertsWindow';
 import ContactWindow from './ContactWindow';
-
-const desktopIcons = [
-  { id: 'about', icon: '👤', label: 'about_me.sys' },
-  { id: 'skills', icon: '🛡️', label: 'skill_scan.exe' },
-  { id: 'projects', icon: '📁', label: 'project_db.dat' },
-  { id: 'ctf', icon: '🏴', label: 'ctf_scores.log' },
-  { id: 'certs', icon: '📜', label: 'certificates.crt' },
-  { id: 'contact', icon: '📡', label: 'secure_comms.sh' },
-];
+import Spotlight from './Spotlight';
 
 function getWindowContent(id: string) {
   switch (id) {
@@ -43,17 +35,32 @@ function getWindowContent(id: string) {
 }
 
 export default function Desktop() {
-  const { booted, setBoot, windows, openWindow } = useOSStore();
+  const { booted, setBoot, windows } = useOSStore();
   const [showDesktop, setShowDesktop] = useState(false);
-  const particles = useMemo(
+
+  const petals = useMemo(
     () =>
-      Array.from({ length: 30 }, (_, i) => ({
+      Array.from({ length: 20 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: 1 + Math.random() * 2,
-        duration: 3 + Math.random() * 5,
-        delay: Math.random() * 3,
+        size: 6 + Math.random() * 10,
+        duration: 5 + Math.random() * 8,
+        delay: Math.random() * 6,
+        opacity: 0.3 + Math.random() * 0.4,
+      })),
+    []
+  );
+
+  const clouds = useMemo(
+    () =>
+      Array.from({ length: 4 }, (_, i) => ({
+        id: i,
+        x: 10 + i * 25 + Math.random() * 10,
+        y: 8 + Math.random() * 20,
+        size: 60 + Math.random() * 80,
+        duration: 20 + Math.random() * 15,
+        delay: Math.random() * 5,
+        opacity: 0.15 + Math.random() * 0.15,
       })),
     []
   );
@@ -64,25 +71,23 @@ export default function Desktop() {
   }, [setBoot]);
 
   const handleOpenTerminal = useCallback(() => {
-    // Check if terminal window exists
     const existing = useOSStore.getState().windows.find((w) => w.id === 'terminal');
     if (existing) {
       useOSStore.getState().openWindow('terminal');
     } else {
-      // Add terminal window dynamically
       useOSStore.setState((state) => ({
         windows: [
           ...state.windows,
           {
             id: 'terminal',
-            title: 'agent@cyberos: ~',
-            icon: '⬛',
+            title: 'Terminal',
+            icon: '💻',
             isOpen: true,
             isMinimized: false,
             isMaximized: false,
             zIndex: state.nextZIndex + 1,
-            position: { x: 60, y: 40 },
-            size: { width: 720, height: 480 },
+            position: { x: 80, y: 60 },
+            size: { width: 700, height: 460 },
           },
         ],
         nextZIndex: state.nextZIndex + 1,
@@ -93,68 +98,96 @@ export default function Desktop() {
   const visibleWindows = windows.filter((w) => w.isOpen);
 
   return (
-    <div className="fixed inset-0 bg-[#0a0e14] overflow-hidden select-none">
+    <div className="fixed inset-0 overflow-hidden select-none">
       {/* Boot Screen */}
       {!booted && <BootScreen onComplete={handleBootComplete} />}
 
-      {/* Desktop Background */}
-      <div className="absolute inset-0">
-        {/* Grid pattern */}
+      {/* Desktop Background - Anime Sunset Sky */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(180deg, #87CEEB 0%, #89CFF0 20%, #B8D4E3 35%, #FFB7C5 55%, #FF9AAD 70%, #DDA0DD 85%, #C9A0DC 100%)',
+        }}
+      >
+        {/* Sun glow */}
         <div
-          className="absolute inset-0 opacity-[0.03]"
+          className="absolute"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,255,65,0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,255,65,0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
+            bottom: '30%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '300px',
+            height: '300px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,200,200,0.2) 40%, transparent 70%)',
           }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900/10 via-transparent to-cyan-900/10" />
-        {/* Floating particles */}
-        {particles.map((p) => (
+
+        {/* Clouds */}
+        {clouds.map((c) => (
           <div
-            key={p.id}
-            className="absolute rounded-full bg-green-400"
+            key={c.id}
+            className="absolute"
             style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-              animation: `float-particle ${p.duration}s ease-in-out ${p.delay}s infinite alternate`,
-              opacity: 0.15,
+              left: `${c.x}%`,
+              top: `${c.y}%`,
+              width: `${c.size}px`,
+              height: `${c.size * 0.4}px`,
+              background: `radial-gradient(ellipse, rgba(255,255,255,${c.opacity}) 0%, transparent 70%)`,
+              borderRadius: '50%',
+              animation: `cloud-float ${c.duration}s ease-in-out ${c.delay}s infinite alternate`,
             }}
           />
         ))}
-        {/* Scanline */}
-        <div className="absolute inset-0 scanline pointer-events-none" />
+
+        {/* Sakura petals */}
+        {petals.map((p) => (
+          <div
+            key={p.id}
+            className="absolute pointer-events-none"
+            style={{
+              left: `${p.x}%`,
+              top: '-15px',
+              animation: `sakura-fall ${p.duration}s ease-in ${p.delay}s infinite, sakura-sway ${2 + p.delay}s ease-in-out ${p.delay}s infinite`,
+              fontSize: `${p.size}px`,
+              opacity: p.opacity,
+            }}
+          >
+            🌸
+          </div>
+        ))}
+
+        {/* Stars/sparkles at top */}
+        {useMemo(() => Array.from({ length: 8 }, (_, i) => ({
+          id: i,
+          x: 5 + Math.random() * 90,
+          y: 2 + Math.random() * 15,
+          size: 2 + Math.random() * 3,
+          duration: 2 + Math.random() * 3,
+          delay: Math.random() * 3,
+        })), []).map((s) => (
+          <div
+            key={s.id}
+            className="absolute rounded-full bg-white"
+            style={{
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: `${s.size}px`,
+              height: `${s.size}px`,
+              animation: `sparkle ${s.duration}s ease-in-out ${s.delay}s infinite`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Desktop Content */}
       <div
-        className={`relative z-10 h-full transition-opacity duration-500 ${
+        className={`relative z-10 h-full transition-opacity duration-700 ${
           showDesktop ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        {/* Desktop Icons */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2">
-          {/* Terminal icon always first */}
-          <button
-            onClick={handleOpenTerminal}
-            onDoubleClick={handleOpenTerminal}
-            className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-white/10 transition-all duration-150 group w-24"
-          >
-            <div className="text-3xl sm:text-4xl group-hover:scale-110 transition-transform duration-150 drop-shadow-lg">
-              ⬛
-            </div>
-            <span className="text-[10px] sm:text-xs text-green-300 font-mono text-center leading-tight drop-shadow-md">
-              terminal.sh
-            </span>
-          </button>
-
-          {desktopIcons.map((item) => (
-            <DesktopIcon key={item.id} id={item.id} icon={item.icon} label={item.label} />
-          ))}
-        </div>
+        {/* Menu Bar */}
+        <MenuBar />
 
         {/* Windows */}
         {visibleWindows.map((win) => (
@@ -163,8 +196,11 @@ export default function Desktop() {
           </Window>
         ))}
 
-        {/* Taskbar */}
-        <Taskbar onOpenTerminal={handleOpenTerminal} />
+        {/* Spotlight Search */}
+        <Spotlight />
+
+        {/* Dock */}
+        <Dock onOpenTerminal={handleOpenTerminal} />
       </div>
     </div>
   );

@@ -7,42 +7,13 @@ import { Badge } from '@/components/ui/badge';
 import { Send, Github, Linkedin, Mail, Globe, Lock } from 'lucide-react';
 
 const socials = [
-  {
-    name: 'GitHub',
-    handle: '@cyberwolf-dev',
-    icon: <Github size={16} />,
-    url: '#',
-    color: 'text-white hover:text-white',
-    bg: 'bg-[#21262d] hover:bg-white/20',
-  },
-  {
-    name: 'LinkedIn',
-    handle: 'Alex Chen',
-    icon: <Linkedin size={16} />,
-    url: '#',
-    color: 'text-blue-400 hover:text-blue-300',
-    bg: 'bg-[#21262d] hover:bg-blue-900/30',
-  },
-  {
-    name: 'Twitter/X',
-    handle: '@cyberwolf_sec',
-    icon: <Globe size={16} />,
-    url: '#',
-    color: 'text-white hover:text-white',
-    bg: 'bg-[#21262d] hover:bg-white/20',
-  },
-  {
-    name: 'Email',
-    handle: 'alex@cyberwolf.dev',
-    icon: <Mail size={16} />,
-    url: 'mailto:alex@cyberwolf.dev',
-    color: 'text-green-400 hover:text-green-300',
-    bg: 'bg-[#21262d] hover:bg-green-900/30',
-  },
+  { name: 'GitHub', handle: '@cyberwolf-dev', icon: <Github size={16} />, gradient: 'from-gray-600 to-gray-800' },
+  { name: 'LinkedIn', handle: 'Alex Chen', icon: <Linkedin size={16} />, gradient: 'from-blue-500 to-blue-700' },
+  { name: 'Twitter/X', handle: '@cyberwolf_sec', icon: <Globe size={16} />, gradient: 'from-sky-500 to-sky-700' },
+  { name: 'Email', handle: 'alex@cyberwolf.dev', icon: <Mail size={16} />, gradient: 'from-pink-500 to-rose-600' },
 ];
 
-const pgpFingerprint =
-  '4A2B 8C3D 9E1F 5A67 B4C2  D8E3 F1A2 3B4C 5D6E 7F8A';
+const pgpFingerprint = '4A2B 8C3D 9E1F 5A67 B4C2  D8E3 F1A2 3B4C 5D6E 7F8A';
 
 export default function ContactWindow() {
   const [name, setName] = useState('');
@@ -65,51 +36,55 @@ export default function ContactWindow() {
   };
 
   return (
-    <div className="p-6 font-mono space-y-5">
-      <div className="text-green-400 text-sm font-bold">&gt; secure_comms.sh --start</div>
-      <div className="text-green-300/60 text-xs">Establishing encrypted channel... OK</div>
+    <div className="p-6 space-y-5 bg-gradient-to-br from-rose-50/50 to-pink-50/50 min-h-full">
+      <div className="flex items-center gap-2 text-foreground/80">
+        <span className="text-lg">💌</span>
+        <h2 className="font-bold text-lg">Secret Comms</h2>
+      </div>
 
       {/* PGP Key */}
-      <div className="bg-[#161b22] rounded-lg p-4 border border-[#30363d]">
+      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <Lock size={14} className="text-yellow-400" />
-          <h3 className="text-yellow-400 text-xs font-bold">PGP Public Key Fingerprint</h3>
+          <Lock size={14} className="text-amber-500" />
+          <h3 className="text-xs font-bold text-foreground/70">PGP Public Key</h3>
         </div>
-        <div className="text-green-400 text-xs bg-black/40 rounded p-2 font-mono break-all">
+        <div className="bg-foreground/5 rounded-lg p-2.5 font-mono text-[11px] text-foreground/50 break-all">
           {pgpFingerprint}
-        </div>
-        <div className="text-green-500/50 text-[10px] mt-2">
-          Encrypt sensitive messages using this key for end-to-end security
         </div>
       </div>
 
       {/* Social Links */}
       <div className="space-y-2">
-        <h3 className="text-cyan-400 text-xs font-bold">&gt; cat /etc/social_links.conf</h3>
+        <h3 className="text-sm font-bold text-foreground/80 flex items-center gap-2">
+          <span>🌐</span> Connect
+        </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {socials.map((s) => (
-            <a
+            <button
               key={s.name}
-              href={s.url}
-              className={`flex items-center gap-3 p-3 rounded-lg border border-[#30363d] ${s.bg} transition-all group`}
+              className={`flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r ${s.gradient} text-white hover:opacity-90 transition-all shadow-sm hover:shadow-md`}
             >
-              <span className={s.color}>{s.icon}</span>
-              <div>
-                <div className="text-green-300 text-xs font-bold">{s.name}</div>
-                <div className="text-green-500/50 text-[10px]">{s.handle}</div>
+              <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+                {s.icon}
               </div>
-            </a>
+              <div className="text-left">
+                <div className="text-sm font-bold">{s.name}</div>
+                <div className="text-white/70 text-[10px]">{s.handle}</div>
+              </div>
+            </button>
           ))}
         </div>
       </div>
 
       {/* Contact Form */}
-      <div className="bg-[#161b22] rounded-lg p-4 border border-[#30363d] space-y-3">
+      <div className="bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-green-400 text-xs font-bold">&gt; Send Secure Message</h3>
+          <h3 className="text-sm font-bold text-foreground/80 flex items-center gap-2">
+            <span>✉️</span> Send Message
+          </h3>
           <button
             onClick={() => setEncrypt(!encrypt)}
-            className="flex items-center gap-1.5 text-[10px] text-yellow-400 hover:text-yellow-300"
+            className="flex items-center gap-1.5 text-[10px] text-amber-600 hover:text-amber-700 transition-colors"
           >
             <Lock size={10} />
             <span>Encrypt: {encrypt ? 'ON' : 'OFF'}</span>
@@ -118,58 +93,58 @@ export default function ContactWindow() {
 
         {sent ? (
           <div className="text-center py-8">
-            <div className="text-green-400 text-2xl mb-2">✓</div>
-            <div className="text-green-400 text-sm font-bold">Message Sent!</div>
-            <div className="text-green-500/50 text-xs mt-1">Encrypted transmission complete</div>
+            <div className="text-4xl mb-2">🌸</div>
+            <div className="text-foreground/80 font-bold">Message Sent!</div>
+            <div className="text-foreground/40 text-xs mt-1">Arigatou gozaimasu~ ✨</div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="text-green-500/50 text-[10px] block mb-1">IDENTITY</label>
+                <label className="text-foreground/40 text-[10px] block mb-1 font-medium">NAME</label>
                 <Input
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your name"
-                  className="bg-[#0d1117] border-[#30363d] text-green-400 placeholder:text-green-800 font-mono text-xs h-9 focus:border-green-700"
+                  className="bg-white/80 border-foreground/10 text-foreground/80 placeholder:text-foreground/25 text-sm h-9 focus:border-pink-300 rounded-lg"
                   required
                 />
               </div>
               <div>
-                <label className="text-green-500/50 text-[10px] block mb-1">COMM_FREQ</label>
+                <label className="text-foreground/40 text-[10px] block mb-1 font-medium">EMAIL</label>
                 <Input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
                   type="email"
-                  className="bg-[#0d1117] border-[#30363d] text-green-400 placeholder:text-green-800 font-mono text-xs h-9 focus:border-green-700"
+                  className="bg-white/80 border-foreground/10 text-foreground/80 placeholder:text-foreground/25 text-sm h-9 focus:border-pink-300 rounded-lg"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="text-green-500/50 text-[10px] block mb-1">TRANSMISSION</label>
+              <label className="text-foreground/40 text-[10px] block mb-1 font-medium">MESSAGE</label>
               <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type your message here..."
+                placeholder="Write your message here..."
                 rows={4}
-                className="w-full bg-[#0d1117] border border-[#30363d] text-green-400 placeholder:text-green-800 font-mono text-xs rounded-md p-3 resize-none focus:border-green-700 focus:outline-none"
+                className="w-full bg-white/80 border border-foreground/10 text-foreground/80 placeholder:text-foreground/25 text-sm rounded-lg p-3 resize-none focus:border-pink-300 focus:outline-none"
                 required
               />
             </div>
             <div className="flex items-center justify-between">
               {encrypt && (
-                <Badge className="bg-yellow-900/30 text-yellow-400 text-[10px] border-yellow-800/30">
+                <Badge className="bg-amber-50 text-amber-600 text-[10px] border-amber-200 border">
                   🔒 AES-256 Encrypted
                 </Badge>
               )}
               <Button
                 type="submit"
-                className="ml-auto bg-green-900/40 hover:bg-green-900/60 text-green-400 border border-green-800/50 text-xs font-mono h-8"
+                className="ml-auto bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white text-xs h-9 rounded-lg shadow-sm hover:shadow-md transition-all border-0"
               >
-                <Send size={12} className="mr-1" />
-                Transmit
+                <Send size={12} className="mr-1.5" />
+                Send ✨
               </Button>
             </div>
           </form>

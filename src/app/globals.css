@@ -44,72 +44,38 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(0.07 0 0);
-  --foreground: oklch(0.92 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.92 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.92 0 0);
-  --primary: oklch(0.75 0.15 150);
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.18 0 0);
-  --secondary-foreground: oklch(0.92 0 0);
-  --muted: oklch(0.18 0 0);
-  --muted-foreground: oklch(0.6 0 0);
-  --accent: oklch(0.18 0 0);
-  --accent-foreground: oklch(0.92 0 0);
+  --radius: 0.75rem;
+  --background: oklch(0.97 0.01 280);
+  --foreground: oklch(0.2 0.02 280);
+  --card: oklch(0.99 0.005 280);
+  --card-foreground: oklch(0.2 0.02 280);
+  --popover: oklch(0.99 0.005 280);
+  --popover-foreground: oklch(0.2 0.02 280);
+  --primary: oklch(0.65 0.2 330);
+  --primary-foreground: oklch(0.98 0.005 330);
+  --secondary: oklch(0.93 0.02 280);
+  --secondary-foreground: oklch(0.25 0.02 280);
+  --muted: oklch(0.93 0.02 280);
+  --muted-foreground: oklch(0.5 0.02 280);
+  --accent: oklch(0.93 0.03 280);
+  --accent-foreground: oklch(0.25 0.02 280);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.75 0.15 150);
-  --chart-1: oklch(0.75 0.15 150);
-  --chart-2: oklch(0.6 0.15 180);
-  --chart-3: oklch(0.7 0.12 60);
-  --chart-4: oklch(0.65 0.2 30);
-  --chart-5: oklch(0.6 0.18 300);
-  --sidebar: oklch(0.1 0 0);
-  --sidebar-foreground: oklch(0.92 0 0);
-  --sidebar-primary: oklch(0.75 0.15 150);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.18 0 0);
-  --sidebar-accent-foreground: oklch(0.92 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.75 0.15 150);
-}
-
-.dark {
-  --background: oklch(0.05 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.08 0 0);
-  --card-foreground: oklch(0.95 0 0);
-  --popover: oklch(0.08 0 0);
-  --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.75 0.15 150);
-  --primary-foreground: oklch(0.05 0 0);
-  --secondary: oklch(0.15 0 0);
-  --secondary-foreground: oklch(0.95 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.15 0 0);
-  --accent-foreground: oklch(0.95 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.55 0.15 150);
-  --chart-1: oklch(0.75 0.15 150);
-  --chart-2: oklch(0.6 0.15 180);
-  --chart-3: oklch(0.7 0.12 60);
-  --chart-4: oklch(0.65 0.2 30);
-  --chart-5: oklch(0.6 0.18 300);
-  --sidebar: oklch(0.07 0 0);
-  --sidebar-foreground: oklch(0.95 0 0);
-  --sidebar-primary: oklch(0.75 0.15 150);
-  --sidebar-primary-foreground: oklch(0.95 0 0);
-  --sidebar-accent: oklch(0.15 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.55 0.15 150);
+  --border: oklch(0.88 0.02 280);
+  --input: oklch(0.88 0.02 280);
+  --ring: oklch(0.65 0.2 330);
+  --chart-1: oklch(0.65 0.2 330);
+  --chart-2: oklch(0.7 0.15 250);
+  --chart-3: oklch(0.7 0.15 170);
+  --chart-4: oklch(0.7 0.15 60);
+  --chart-5: oklch(0.65 0.15 300);
+  --sidebar: oklch(0.97 0.01 280);
+  --sidebar-foreground: oklch(0.2 0.02 280);
+  --sidebar-primary: oklch(0.65 0.2 330);
+  --sidebar-primary-foreground: oklch(0.98 0.005 330);
+  --sidebar-accent: oklch(0.93 0.02 280);
+  --sidebar-accent-foreground: oklch(0.25 0.02 280);
+  --sidebar-border: oklch(0.88 0.02 280);
+  --sidebar-ring: oklch(0.65 0.2 330);
 }
 
 @layer base {
@@ -121,83 +87,113 @@
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - anime pink */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 65, 0.2);
+  background: rgba(168, 85, 247, 0.25);
   border-radius: 3px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 65, 0.4);
+  background: rgba(168, 85, 247, 0.45);
 }
 
-/* Scanline effect */
-.scanline {
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 255, 65, 0.015) 2px,
-    rgba(0, 255, 65, 0.015) 4px
-  );
-  pointer-events: none;
-}
-
-/* Matrix rain animation */
-@keyframes matrix-fall {
+/* Sakura petal fall animation */
+@keyframes sakura-fall {
   0% {
-    transform: translateY(-100%);
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
     opacity: 0;
   }
   10% {
-    opacity: 1;
+    opacity: 0.8;
   }
   90% {
-    opacity: 1;
+    opacity: 0.6;
   }
   100% {
-    transform: translateY(100vh);
+    transform: translateY(105vh) rotate(360deg) translateX(80px);
     opacity: 0;
   }
 }
 
-/* Floating particle animation */
-@keyframes float-particle {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0.05;
+@keyframes sakura-sway {
+  0%, 100% {
+    transform: translateX(0);
   }
-  50% {
-    opacity: 0.2;
+  25% {
+    transform: translateX(15px);
   }
-  100% {
-    transform: translate(20px, -30px);
-    opacity: 0.05;
+  75% {
+    transform: translateX(-15px);
   }
 }
 
-/* Terminal cursor blink */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+/* Dock magnification */
+@keyframes dock-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
 }
 
-/* Glow effects */
-.glow-green {
-  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3), 0 0 20px rgba(0, 255, 65, 0.1);
+/* Frosted glass */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-.glow-cyan {
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.1);
+.glass-dark {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+/* macOS window shadow */
+.macos-shadow {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.macos-shadow-sm {
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* Dock shadow */
+.dock-shadow {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.15),
+    0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Anime sparkle */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+}
+
+/* Cloud float */
+@keyframes cloud-float {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(30px); }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Hide scrollbar globally */

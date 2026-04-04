@@ -23,8 +23,8 @@ interface OSStore {
   maximizeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
   updatePosition: (id: string, x: number, y: number) => void;
-  startMenuOpen: boolean;
-  setStartMenuOpen: (v: boolean) => void;
+  spotlightOpen: boolean;
+  setSpotlightOpen: (v: boolean) => void;
   terminalHistory: string[];
   addTerminalLine: (line: string) => void;
   clearTerminal: () => void;
@@ -33,69 +33,69 @@ interface OSStore {
 const initialWindows: WindowState[] = [
   {
     id: 'about',
-    title: 'about_me.sys',
-    icon: '👤',
+    title: 'About Me',
+    icon: '🐱',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 80, y: 60 },
+    position: { x: 100, y: 60 },
     size: { width: 680, height: 500 },
   },
   {
     id: 'skills',
-    title: 'skill_scan.exe',
-    icon: '🛡️',
+    title: 'Skill Arsenal',
+    icon: '⚔️',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 160, y: 90 },
-    size: { width: 720, height: 520 },
+    position: { x: 150, y: 80 },
+    size: { width: 700, height: 520 },
   },
   {
     id: 'projects',
-    title: 'project_db.dat',
-    icon: '📁',
+    title: 'Mission Files',
+    icon: '📚',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 120, y: 50 },
-    size: { width: 780, height: 560 },
+    position: { x: 80, y: 50 },
+    size: { width: 760, height: 540 },
   },
   {
     id: 'ctf',
-    title: 'ctf_scoreboard.log',
-    icon: '🏴',
+    title: 'CTF Arena',
+    icon: '🎯',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 100, y: 70 },
-    size: { width: 740, height: 540 },
+    position: { x: 120, y: 70 },
+    size: { width: 740, height: 520 },
   },
   {
     id: 'certs',
-    title: 'certificates.crt',
-    icon: '📜',
+    title: 'Achievements',
+    icon: '✨',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 140, y: 80 },
+    position: { x: 140, y: 60 },
     size: { width: 700, height: 500 },
   },
   {
     id: 'contact',
-    title: 'secure_comms.sh',
-    icon: '📡',
+    title: 'Secret Comms',
+    icon: '💌',
     isOpen: false,
     isMinimized: false,
     isMaximized: false,
     zIndex: 0,
-    position: { x: 200, y: 100 },
-    size: { width: 640, height: 480 },
+    position: { x: 180, y: 90 },
+    size: { width: 650, height: 480 },
   },
 ];
 
@@ -145,8 +145,8 @@ export const useOSStore = create<OSStore>((set) => ({
         w.id === id ? { ...w, position: { x, y } } : w
       ),
     })),
-  startMenuOpen: false,
-  setStartMenuOpen: (v) => set({ startMenuOpen: v }),
+  spotlightOpen: false,
+  setSpotlightOpen: (v) => set({ spotlightOpen: v }),
   terminalHistory: [],
   addTerminalLine: (line) =>
     set((state) => ({

@@ -9,8 +9,8 @@ const certifications = [
     issuer: 'Offensive Security',
     date: 'Dec 2024',
     status: 'Earned',
-    color: 'border-red-500/50 bg-red-500/10',
     icon: '💀',
+    gradient: 'from-red-500 to-rose-600',
   },
   {
     name: 'CEH',
@@ -18,8 +18,8 @@ const certifications = [
     issuer: 'EC-Council',
     date: 'Aug 2024',
     status: 'Earned',
-    color: 'border-green-500/50 bg-green-500/10',
     icon: '🔐',
+    gradient: 'from-green-500 to-emerald-600',
   },
   {
     name: 'CompTIA Security+',
@@ -27,8 +27,8 @@ const certifications = [
     issuer: 'CompTIA',
     date: 'Mar 2024',
     status: 'Earned',
-    color: 'border-cyan-500/50 bg-cyan-500/10',
     icon: '🛡️',
+    gradient: 'from-blue-500 to-indigo-600',
   },
   {
     name: 'eWPT',
@@ -36,8 +36,8 @@ const certifications = [
     issuer: 'INE Security',
     date: 'Jun 2024',
     status: 'Earned',
-    color: 'border-yellow-500/50 bg-yellow-500/10',
     icon: '🕸️',
+    gradient: 'from-amber-500 to-yellow-600',
   },
   {
     name: 'AWS CCP',
@@ -45,8 +45,8 @@ const certifications = [
     issuer: 'Amazon Web Services',
     date: 'Jan 2024',
     status: 'Earned',
-    color: 'border-orange-500/50 bg-orange-500/10',
     icon: '☁️',
+    gradient: 'from-orange-500 to-amber-600',
   },
   {
     name: 'OSWE',
@@ -54,27 +54,26 @@ const certifications = [
     issuer: 'Offensive Security',
     date: 'In Progress',
     status: 'In Progress',
-    color: 'border-purple-500/50 bg-purple-500/10',
     icon: '🎯',
+    gradient: 'from-violet-500 to-purple-600',
   },
 ];
 
 const trainings = [
-  { name: 'SANS SEC560', desc: 'Network Penetration Testing & Ethical Hacking', hours: 45 },
-  { name: 'SANS FOR500', desc: 'Windows Forensic Analysis', hours: 40 },
-  { name: 'PentesterLab', desc: 'Web Security Training', hours: 200 },
-  { name: 'PortSwigger Academy', desc: 'Web Security Academy', hours: 300 },
-  { name: 'TCM Security', desc: 'Practical Ethical Hacking', hours: 80 },
+  { name: 'SANS SEC560', desc: 'Network Penetration Testing', hours: 45, emoji: '🎓' },
+  { name: 'SANS FOR500', desc: 'Windows Forensic Analysis', hours: 40, emoji: '🔍' },
+  { name: 'PentesterLab', desc: 'Web Security Training', hours: 200, emoji: '🧪' },
+  { name: 'PortSwigger Academy', desc: 'Web Security Academy', hours: 300, emoji: '🕸️' },
+  { name: 'TCM Security', desc: 'Practical Ethical Hacking', hours: 80, emoji: '⚔️' },
 ];
 
 export default function CertsWindow() {
   return (
-    <div className="p-6 font-mono space-y-5">
-      <div className="text-green-400 text-sm font-bold">
-        &gt; gpg --verify certificates.crt
-      </div>
-      <div className="text-green-300/60 text-xs">
-        Good signature from &quot;cyberwolf@verified&quot;
+    <div className="p-6 space-y-5 bg-gradient-to-br from-emerald-50/50 to-violet-50/50 min-h-full">
+      <div className="flex items-center gap-2 text-foreground/80">
+        <span className="text-lg">✨</span>
+        <h2 className="font-bold text-lg">Achievements</h2>
+        <span className="text-xs text-foreground/40 ml-auto">5 earned · 1 in progress</span>
       </div>
 
       {/* Certifications */}
@@ -82,29 +81,29 @@ export default function CertsWindow() {
         {certifications.map((cert) => (
           <div
             key={cert.name}
-            className={`bg-[#161b22] rounded-lg p-4 border ${cert.color} transition-all`}
+            className={`bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/50 shadow-sm hover:shadow-md transition-all`}
           >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">{cert.icon}</span>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-green-400 font-bold text-sm">{cert.name}</h3>
-                    {cert.status === 'In Progress' && (
-                      <Badge className="bg-purple-900/40 text-purple-400 text-[10px]">
-                        In Progress
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="text-green-300/60 text-xs">{cert.fullName}</div>
-                  <div className="text-green-500/50 text-[10px] mt-0.5">
-                    {cert.issuer} &bull; {cert.date}
-                  </div>
+            <div className="flex items-center gap-3">
+              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cert.gradient} flex items-center justify-center text-2xl shadow-md shrink-0`}>
+                {cert.icon}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="text-foreground/90 font-bold text-sm">{cert.name}</h3>
+                  {cert.status === 'In Progress' && (
+                    <Badge className="bg-violet-100 text-violet-600 text-[10px] border-0">
+                      In Progress 🔄
+                    </Badge>
+                  )}
+                </div>
+                <div className="text-foreground/50 text-xs">{cert.fullName}</div>
+                <div className="text-foreground/40 text-[10px] mt-0.5">
+                  {cert.issuer} &bull; {cert.date}
                 </div>
               </div>
               {cert.status === 'Earned' && (
-                <div className="text-green-400 text-[10px] bg-green-900/30 px-3 py-1 rounded border border-green-800/30">
-                  ✓ VERIFIED
+                <div className="text-emerald-500 text-[10px] bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 font-medium shrink-0">
+                  ✓ Verified
                 </div>
               )}
             </div>
@@ -114,23 +113,28 @@ export default function CertsWindow() {
 
       {/* Training */}
       <div className="space-y-2">
-        <h3 className="text-cyan-400 text-sm font-bold">&gt; Training & Labs</h3>
+        <h3 className="text-sm font-bold text-foreground/80 flex items-center gap-2">
+          <span>📖</span> Training & Labs
+        </h3>
         {trainings.map((t) => (
           <div
             key={t.name}
-            className="bg-[#161b22] rounded-lg p-3 border border-[#30363d] flex items-center justify-between"
+            className="bg-white/60 backdrop-blur-sm rounded-xl p-3 border border-white/50 flex items-center gap-3 shadow-sm"
           >
-            <div>
-              <div className="text-green-300 text-xs font-bold">{t.name}</div>
-              <div className="text-green-500/50 text-[10px]">{t.desc}</div>
+            <span className="text-xl">{t.emoji}</span>
+            <div className="flex-1 min-w-0">
+              <div className="text-foreground/80 text-sm font-bold">{t.name}</div>
+              <div className="text-foreground/45 text-xs">{t.desc}</div>
             </div>
-            <div className="text-cyan-400 text-xs shrink-0">{t.hours}h</div>
+            <Badge variant="outline" className="text-[10px] border-foreground/10 text-foreground/50 bg-white/50 shrink-0">
+              {t.hours}h
+            </Badge>
           </div>
         ))}
       </div>
 
-      <div className="text-green-500/50 text-[10px] pt-2 border-t border-[#30363d]">
-        &gt; Total certification study hours: 1,200+ | Total lab hours: 800+
+      <div className="text-foreground/30 text-[10px] text-center pt-2">
+        Total study hours: 1,200+ · Total lab hours: 800+ 📚
       </div>
     </div>
   );
